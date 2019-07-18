@@ -10,6 +10,7 @@
 #include <Psapi.h>
 #include <iostream>
 #include <cstddef>
+#include <algorithm>
 
 extern "C" MemoryHandler_API int MemSearch(const HANDLE process, const BYTE arr[], const int length, UINT64 ptrs[], const int maxcount);
 
@@ -17,9 +18,9 @@ extern "C" MemoryHandler_API BYTE* ReadMemory(const HANDLE process,const size_t 
 
 extern "C" MemoryHandler_API BYTE ReadByte(const HANDLE process, const LPCVOID address);
 
-extern "C" MemoryHandler_API int ReadInt32(const HANDLE process,const LPCVOID address);
+extern "C" MemoryHandler_API UINT32 ReadInt32(const HANDLE process,const LPCVOID address);
 
-extern "C" MemoryHandler_API long ReadInt64(const HANDLE process,const LPCVOID address);
+extern "C" MemoryHandler_API UINT64 ReadInt64(const HANDLE process,const LPCVOID address);
 
 extern "C" MemoryHandler_API void WriteMemory(const HANDLE process, const BYTE* data, const size_t size, const LPVOID address);
 

@@ -20,7 +20,8 @@ int MemSearch(const HANDLE process, const BYTE pattern[], const int length, UINT
 			ReadProcessMemory(process, info.BaseAddress, buffer, info.RegionSize, &cp);
 
 			//search for the target pattern
-			UINT64 end = (UINT64)info.RegionSize - length;
+			UINT64 end = (UINT64)info.RegionSize;
+
 			for (UINT64 i = 0; i < end; i++)
 			{
 				if (!memcmp(buffer + i, pattern, length))
@@ -49,17 +50,17 @@ BYTE* ReadMemory(const HANDLE process, const size_t size, const LPCVOID address)
 
 BYTE ReadByte(const HANDLE process, const LPCVOID address)
 {
-	return *ReadMemory(process,sizeof(BYTE),address);
+	return *ReadMemory(process,1,address);
 }
 
-int ReadInt32(const HANDLE process, const LPCVOID address)
+UINT32 ReadInt32(const HANDLE process, const LPCVOID address)
 {
-	return *ReadMemory(process, sizeof(INT32), address);
+	return *((UINT32*)ReadMemory(process, 4, address));
 }
 
-long ReadInt64(const HANDLE process, const LPCVOID address)
+UINT64 ReadInt64(const HANDLE process, const LPCVOID address)
 {
-	return *ReadMemory(process, sizeof(INT64), address);
+	return *((UINT64*)ReadMemory(process, 8, address));
 }
 
 void WriteMemory(const HANDLE process, const BYTE* data, const size_t size, const LPVOID address)
