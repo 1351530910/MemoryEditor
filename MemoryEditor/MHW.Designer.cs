@@ -49,6 +49,7 @@
             this.lockedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.itemBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.set_btn = new System.Windows.Forms.Button();
+            this.LockAll = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -179,7 +180,6 @@
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(548, 333);
             this.dataGridView1.TabIndex = 14;
-
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -225,11 +225,22 @@
             this.set_btn.UseVisualStyleBackColor = true;
             this.set_btn.Click += new System.EventHandler(this.Set_btn_Click);
             // 
+            // LockAll
+            // 
+            this.LockAll.Location = new System.Drawing.Point(344, 62);
+            this.LockAll.Name = "LockAll";
+            this.LockAll.Size = new System.Drawing.Size(75, 23);
+            this.LockAll.TabIndex = 16;
+            this.LockAll.Text = "LockAll";
+            this.LockAll.UseVisualStyleBackColor = true;
+            this.LockAll.Click += new System.EventHandler(this.LockAll_Click);
+            // 
             // MHW
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(575, 460);
+            this.Controls.Add(this.LockAll);
             this.Controls.Add(this.set_btn);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.comboBox1);
@@ -284,5 +295,6 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn lockedDataGridViewCheckBoxColumn;
         private System.Windows.Forms.BindingSource itemBindingSource;
         private System.Windows.Forms.Button set_btn;
+        private System.Windows.Forms.Button LockAll;
     }
 }

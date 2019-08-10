@@ -6,11 +6,19 @@
 #define MemoryHandler_API __declspec(dllimport)
 #endif
 
+#define nCores 16
+#define processReadWrite 0x04
+#define processCommit 0x00001000
+
 #include <Windows.h>
 #include <Psapi.h>
 #include <iostream>
 #include <cstddef>
 #include <algorithm>
+#include <atomic>
+#include <vector>
+#include <thread>
+
 
 extern "C" MemoryHandler_API int MemSearch(const HANDLE process, const BYTE arr[], const int length, UINT64 ptrs[], const int maxcount);
 

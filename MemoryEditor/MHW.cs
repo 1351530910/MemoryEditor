@@ -28,7 +28,7 @@ namespace MemoryEditor
         Item[] inventoryAmmo = new Item[16];
         Item[] stockItems = new Item[150];
         Item[] stockAmmo = new Item[100];
-        Item[] stockMaterials = new Item[350];
+        Item[] stockMaterials = new Item[390];
         Item[] stockGems = new Item[150];
 
         static List<Item> locks = new List<Item>();
@@ -66,6 +66,7 @@ namespace MemoryEditor
                         var item = locks[i];
                         ProcessIO.WriteInt32(handle, item.address, item.id);
                         ProcessIO.WriteInt32(handle, item.address + 4, item.count);
+                        Thread.Sleep(100);
                     }
                     catch (Exception) { }
                 }
@@ -196,12 +197,11 @@ namespace MemoryEditor
             sp = int.Parse(SP_tb.Text);
 
             var keyword = ((ulong)sp << 32) + (ulong)gold;
-            UIntPtr[] addresses = new UIntPtr[1];
-            var n = ProcessIO.MemSearch(handle, BitConverter.GetBytes(keyword), 8, addresses, 1);
+            UIntPtr[] addresses = new UIntPtr[1000];
+            var n = ProcessIO.MemSearch(handle, BitConverter.GetBytes(keyword), 8, addresses, 1000);
             if (n >= 1) baseAddress = addresses[0].ToUInt64();
-
+            else return;
             refreshMem();
-
         }
 
         private void Save_Click(object sender, EventArgs e)
@@ -267,6 +267,23 @@ namespace MemoryEditor
             ProcessIO.WriteInt32(handle, baseAddress + 4, sp);
             ProcessIO.WriteInt32(handle, baseAddress + 8, exp);
             ProcessIO.WriteInt32(handle, baseAddress - 4, level);
+        }
+
+        private void LockAll_Click(object sender, EventArgs e)
+        {
+            Refresh_btn_Click(null, null);
+            dataGridView1.Visible = !dataGridView1.Visible;
+            if (dataGridView1.Visible)
+            {
+                locks.RemoveAll(x => true);
+            }
+            else
+            {
+                locks.RemoveAll(x => true);
+                locks.AddRange(inventoryItems.Where(x => x.id != 0));
+                locks.AddRange(inventoryAmmo.Where(x => x.id != 0));
+            }
+            
         }
     }
     public struct Item
