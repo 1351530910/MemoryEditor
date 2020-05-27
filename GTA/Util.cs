@@ -11,7 +11,7 @@ namespace Utils
     /// <summary>
     /// wrapper class
     /// </summary>
-    public class ProcessIO
+    public class Wrapper
     {
         [DllImport("Util.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern int MemSearch(IntPtr process, byte[] arr, int length, UIntPtr[] ptrs,int maxcount);
